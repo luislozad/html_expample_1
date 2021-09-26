@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Madre8 - editor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/lib/codemirror.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/theme/darcula.css">
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/lib/codemirror.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/mode/javascript/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/addon/selection/active-line.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/addon/edit/matchbrackets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.50.2/keymap/sublime.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <code>
+        <form><textarea id="code" name="code">
+function findSequence(goal) {
+    function find(start, history) {
+    if (start == goal)
+        return history;
+    else if (start > goal)
+        return null;
+    else
+        return find(start + 5, "(" + history + " + 5)") ||
+                find(start * 3, "(" + history + " * 3)");
+    }
+    return find(1, "1");
+}</textarea></form>
+    </code>
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            matchBrackets: true,
+            theme: "darcula",
+            keyMap: "sublime"
+        });
+
+        // console.log(editor.getValue());
+    </script>
+</body>
+
+</html>
